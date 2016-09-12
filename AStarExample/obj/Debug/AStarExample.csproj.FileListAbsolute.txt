@@ -1,0 +1,12 @@
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\bin\Debug\AStarExample.exe.config
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\bin\Debug\AStarExample.exe
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\bin\Debug\AStarExample.pdb
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.csprojResolveAssemblyReference.cache
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.Form1.resources
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.Properties.Resources.resources
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.csproj.GenerateResource.Cache
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.exe
+E:\Dev Projects\Sandbox\AStarExample\AStarExample\obj\Debug\AStarExample.pdb
+E:\Visual Studio Projects\JCR\AStarExample\AStarExample\bin\Debug\AStarExample.exe.config
+E:\Visual Studio Projects\JCR\AStarExample\AStarExample\obj\Debug\AStarExample.exe
+E:\Visual Studio Projects\JCR\AStarExample\AStarExample\obj\Debug\AStarExample.pdb
