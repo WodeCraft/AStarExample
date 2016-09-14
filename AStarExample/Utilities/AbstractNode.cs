@@ -2,17 +2,27 @@
 
 namespace AStarExample.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class AbstractNode
     {
         int heuristics, movementCost;
         AbstractNode parentNode;
         readonly Coordinate location;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="location">A Coordinate object containing location information about this Node.</param>
         protected AbstractNode(Coordinate location)
         {
             this.location = location;
         }
 
+        /// <summary>
+        /// The Heuristics value of this Node
+        /// </summary>
         public int H
         {
             get
@@ -28,6 +38,9 @@ namespace AStarExample.Utilities
             }
         }
 
+        /// <summary>
+        /// The movement cost of this Node
+        /// </summary>
         public int G
         {
             get
@@ -43,6 +56,10 @@ namespace AStarExample.Utilities
             }
         }
 
+        /// <summary>
+        /// The total value of this Node.
+        /// Found by adding the H and G values.
+        /// </summary>
         public int F
         {
             get
@@ -51,6 +68,9 @@ namespace AStarExample.Utilities
             }
         }
 
+        /// <summary>
+        /// The Coordinate specifying the location of this Node
+        /// </summary>
         public Coordinate Location
         {
             get
@@ -59,6 +79,9 @@ namespace AStarExample.Utilities
             }
         }
 
+        /// <summary>
+        /// A reference to the node that represents the parent of this Node
+        /// </summary>
         public AbstractNode ParentNode
         {
             get
@@ -74,6 +97,9 @@ namespace AStarExample.Utilities
             }
         }
 
+        /// <summary>
+        /// Property indicating if the node is parseable or if it will block any movement through.
+        /// </summary>
         public bool IsParseable { get; set; }
 
         /// <summary>
@@ -85,31 +111,6 @@ namespace AStarExample.Utilities
             G = 0;
             parentNode = null;
         }
-
-        /// <summary>
-        /// This method will return true if this node is at the same position as <paramref name="nodeToCompare"/>.
-        /// </summary>
-        /// <param name="nodeToCompare">The node that this node should be compared with.</param>
-        /// <returns>True if this node and the <paramref name="nodeToCompare"/> are at the same location.</returns>
-        //public bool Equals(AbstractNode nodeToCompare)
-        //{
-        //    // Compare the location of nodeToCompare and this Node
-        //    return (this.location.X == nodeToCompare.Location.X) && (this.location.Y == nodeToCompare.Location.Y);
-        //}
-
-        /// <summary>
-        /// This method will check if the current node is diagonal to the node specified by <paramref name="nodeToCheck"/>. 
-        /// If that is the case, the method will return true otherwise it will return false.
-        /// </summary>
-        /// <param name="nodeToCheck">The node to check whether or not this node is at a diagonal position.</param>
-        /// <returns>True if this node is diagonal to <paramref name="nodeToCheck"/> otherwise it will return false.</returns>
-        //public bool IsDiagonal(AbstractNode nodeToCheck)
-        //{
-        //    int x = Math.Abs(this.location.X - nodeToCheck.Location.X);
-        //    int y = Math.Abs(this.location.Y - nodeToCheck.Location.Y);
-
-        //    return (x + y) == 2;
-        //}
 
     }
 }

@@ -53,6 +53,7 @@ namespace AStarExample.OwnImplementation
                 }
 
                 // Step 3: Add surrounding Nodes to OpenList, if they aren't there already
+                // INFO: Commented out because the Nodes are now added to OpenList as part of the above foreach-loop
                 //OpenList.AddRange(surroundingNodes);
 
                 // Step 4: 
@@ -68,6 +69,7 @@ namespace AStarExample.OwnImplementation
                 // Repeat from Step 1
             }
 
+            // INFO: Commented out because the best path is now in the ClosedList
             //List<Node> bestPath = FetchBestPath(searchParameters);
 
             return ClosedList; // bestPath;
@@ -112,6 +114,11 @@ namespace AStarExample.OwnImplementation
             return false;
         }
 
+        /// <summary>
+        /// This method will find the next Node with the lowest F value from the class property OpenList.
+        /// It is possible that a null value will be found.
+        /// </summary>
+        /// <returns>Returns a Node object with the lowest F value.</returns>
         private Node FindNextNode()
         {
             // Step 4.1: Find the Node with the lowest F in OpenList
@@ -119,6 +126,11 @@ namespace AStarExample.OwnImplementation
             return OpenList.OrderBy(node => node.F).First();
         }
 
+        /// <summary>
+        /// NB: Currently not used!
+        /// </summary>
+        /// <param name="parameters">A PathFinderParameters object containing the </param>
+        /// <returns>Returns a list of Node objects representing the best path from a start node to the end node. These are specified in the <paramref name="parameters"/>.</returns>
         private List<Node> FetchBestPath(PathFinderParameters parameters)
         {
             List<Node> returnList = new List<Node>() { parameters.EndNode };
@@ -143,7 +155,17 @@ namespace AStarExample.OwnImplementation
             return returnList;
         }
 
-
+        /// <summary>
+        /// Method that makes sure all <paramref name="nodes"/> will get their 
+        /// heuristics value calculated based on their location relative to 
+        /// the <paramref name="endNode"/>.
+        /// 
+        /// The actual calculation of the heuristics value is being done by the 
+        /// CalculateHeuristics()-method in the implementation of the IHeuristicsCalculator 
+        /// that has been specified when the constructor was called.
+        /// </summary>
+        /// <param name="nodes">An IEnumerable collection of Node that will get their heuristics calculated.</param>
+        /// <param name="endNode">A Node object representing the end node.</param>
         private void CalculateHeuristics(IEnumerable<Node> nodes, Node endNode)
         {
 
