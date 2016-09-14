@@ -20,6 +20,12 @@ namespace AStarExample.OwnImplementation
             this.heuristicCalculator = heuristicCalculator;
         }
 
+        /// <summary>
+        /// This method will step through all Nodes in the "world" to find the best 
+        /// path between searchParameters.StartNode and searchParameters.EndNode.
+        /// </summary>
+        /// <param name="searchParameters"></param>
+        /// <returns>A List object containing the different Node objects representing the best path.</returns>
         public List<Node> FindBestPath(PathFinderParameters searchParameters)
         {
             Reset();
@@ -85,17 +91,6 @@ namespace AStarExample.OwnImplementation
         {
             // Step 1.3: Find surrounding nodes for CurrentNode which are not in the ClosedList
             List<Node> surroundingNodes = allNodes.Where(n => n.Location.IsCoordinateNextTo(currentNode.Location)).ToList<Node>();
-
-            // INFO This solution could be very slow since all nodes are looped through
-            //List<Node> surroundingNodes = new List<Node>();
-            //foreach (Node n in allNodes)
-            //{
-            //    if (n.Location.IsCoordinateNextTo(currentNode.Location))
-            //    {
-            //        surroundingNodes.Add(n);
-            //    }
-            //}
-
             return surroundingNodes;
         }
 
