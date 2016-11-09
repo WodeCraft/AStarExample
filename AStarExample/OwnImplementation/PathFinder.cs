@@ -11,8 +11,10 @@ namespace AStarExample.OwnImplementation
 
         private IHeuristicCalculator heuristicCalculator;
 
+        // List of Nodes that still needs to be checked
         private readonly List<Node> OpenList = new List<Node>();
 
+        // List of Nodes that have already been checked
         private readonly List<Node> ClosedList = new List<Node>();
 
         public PathFinder(IHeuristicCalculator heuristicCalculator)
@@ -29,15 +31,14 @@ namespace AStarExample.OwnImplementation
         public List<Node> FindBestPath(PathFinderParameters searchParameters)
         {
             Reset();
+            // Start out by calculating the heuristics values of all nodes.
             CalculateHeuristics(searchParameters.Nodes, searchParameters.EndNode);
 
             // Step 1:
             // Step 1.1: Add CurrentNode to ClosedList. First run-through the CurrentNode is searchParameters.StartNode
-            //          How to make sure the two nodes can be compared?
             Node currentNode = searchParameters.StartNode;
             ClosedList.Add(currentNode);
             // Step 1.2: As long as there is a CurrentNode and the CurrentNode is not the same as the searchParameters.EndNode
-            // TODO This is not updating the values for the nodes in searchParameters.Nodes, but instead a different list of nodes
             while (currentNode != null && !currentNode.Location.Equals(searchParameters.EndNode.Location))
             {
                 // Step 1.3: Find surrounding nodes for CurrentNode which are not in the ClosedList
@@ -58,35 +59,36 @@ namespace AStarExample.OwnImplementation
                     }
                 }
 
-                // Step 3: Add surrounding Nodes to OpenList, if they aren't there already
-                // INFO: Commented out because the Nodes are now added to OpenList as part of the above foreach-loop
-                //OpenList.AddRange(surroundingNodes);
-
                 // Step 4: 
                 // Step 4.1: Find the Node with the lowest F in OpenList
                 Node lowestF = FindNextNode();
                 // Step 4.2: Set CurrentNode = NodeWithLowestF
                 currentNode = lowestF;
-                // Step 4.3: If CurrentNode = searchParameters.EndNode then we are done!
-                // Step 4.4: Else update OpenList and ClosedList
+                // Step 4.3: Else update OpenList and ClosedList
                 OpenList.Remove(currentNode);
                 ClosedList.Add(currentNode);
 
                 // Repeat from Step 1
             }
 
-            // INFO: Commented out because the best path is now in the ClosedList
-            //List<Node> bestPath = FetchBestPath(searchParameters);
-
-            return ClosedList; // bestPath;
+            return ClosedList;
         }
 
+        /// <summary>
+        /// Used for resetting the lists of Open and Closed Nodes.
+        /// </summary>
         private void Reset()
         {
             OpenList.Clear();
             ClosedList.Clear();
         }
 
+        /// <summary>
+        /// This method will find all the nodes in <paramref name="allNodes"/> that are surrounding nodes of <paramref name="currentNode"/> .
+        /// </summary>
+        /// <param name="allNodes"></param>
+        /// <param name="currentNode"></param>
+        /// <returns>Returns a list of Nodes that are all surrounding <paramref name="currentNode"/>.</returns>
         private List<Node> FindSurroundingNodes(IEnumerable<Node> allNodes, Node currentNode)
         {
             // Step 1.3: Find surrounding nodes for CurrentNode which are not in the ClosedList
@@ -94,6 +96,12 @@ namespace AStarExample.OwnImplementation
             return surroundingNodes;
         }
 
+        /// <summary>
+        /// This method will calculate the movementcost of <paramref name="n"/> based on <paramref name="potentialParent"/>.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="potentialParent"></param>
+        /// <returns>Returns a boolean value indicating whether or not the movement cost of <paramref name="n"/> has been recalculated.</returns>
         private bool CalculateMovementCost(Node n, Node potentialParent)
         {
             // Step 2.2: Check if any Nodes need to have their G recalculated
@@ -122,7 +130,7 @@ namespace AStarExample.OwnImplementation
         }
 
         /// <summary>
-        /// NB: Currently not used!
+        /// NB: Currently not used! The ClosedList is now containing the best path.
         /// </summary>
         /// <param name="parameters">A PathFinderParameters object containing the </param>
         /// <returns>Returns a list of Node objects representing the best path from a start node to the end node. These are specified in the <paramref name="parameters"/>.</returns>

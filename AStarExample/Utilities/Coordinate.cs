@@ -39,12 +39,6 @@ namespace AStarExample.Utilities
         /// <returns></returns>
         public bool IsCoordinateNextTo(Coordinate other)
         {
-            //if (Equals(other))
-            //{
-            //    return false;
-            //}
-
-            //return Math.Abs(other.X - X) <= 1 && Math.Abs(other.Y - Y) <= 1;
             return IsCoordinateDiagonal(other) || IsCoordinateHorizontalOrVertical(other);
         }
 
